@@ -5,36 +5,47 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import axios from '../api/axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    // name: '',
     email: '',
     password: '',
-    // number: ''
+    number: ''
   });
   const [errors, setErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
     setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
+    setErrorMessage('');
   };
 
   const validate = () => {
     const newErrors = {};
-    // if (!formData.name) newErrors.name = 'Name is required';
+  
     if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.password) newErrors.password = 'Password is required';
-    // if (!formData.number) newErrors.number = 'Number is required';
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validate();
     if (Object.keys(newErrors).length === 0) {
-      document.getElementById('login-link').click();
+      try {
+        const response = await axios.post('/login', formData);
+        if (response.data === 'Login successful') {
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        if (error.response) {
+          setErrorMessage(error.response.data);
+        }
+      }
     } else {
       setErrors(newErrors);
     }
@@ -52,30 +63,11 @@ const Login = () => {
             Login
           </Typography>
           <center>
-
-          <div className='id1'>
-
-          </div>
-          <br></br>
+            <div className='id1'></div>
+            <br />
           </center>
 
           <form onSubmit={handleSubmit}>
-            {/* <TextField
-              id="name"
-              name="name"
-              label="Name"
-              variant="outlined"
-              fullWidth
-              required
-              autoFocus
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              error={!!errors.name}
-              helperText={errors.name}
-              style={{ marginBottom: '20px' }}
-            /> */}
-
             <TextField
               id="email"
               name="email"
@@ -108,21 +100,6 @@ const Login = () => {
               style={{ marginBottom: '20px' }}
             />
 
-            {/* <TextField
-              id="number"
-              name="number"
-              label="Number"
-              variant="outlined"
-              fullWidth
-              required
-              placeholder="Enter your number"
-              value={formData.number}
-              onChange={handleChange}
-              error={!!errors.number}
-              helperText={errors.number}
-              style={{ marginBottom: '20px' }}
-            /> */}
-
             <Button
               type="submit"
               variant="contained"
@@ -134,9 +111,22 @@ const Login = () => {
               Login
             </Button>
           </form>
+          
+          {errorMessage && (
+            <Typography color="error" align="center">
+              {errorMessage}
+            </Typography>
+          )}
 
-         
-          <Link to="/" id="login-link" style={{ display: 'none' }} />
+          {isLoggedIn && (
+            <Link to="/" id="login-link" style={{ textAlign: 'center', display: 'block', marginTop: '10px' }}>
+              Proceed to Home
+            </Link>
+          )}
+
+          <Link to="/signup" style={{ display: 'block', textAlign: 'center', marginTop: '10px' }}>
+            Need to signup?
+          </Link>
         </Paper>
       </div>
     </div>
