@@ -117,7 +117,7 @@ const Navbar = () => {
       <AppBar position="static" style={{ backgroundColor: '#674188', height: "60px" }}>
         <Toolbar style={{ minHeight: '70px', display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center' }}>
-            <Typography variant="h6" style={{ display: 'flex', alignItems: 'center', marginRight: '20px', fontSize: "30px" }}>
+            <Typography variant="h6" style={{ display: 'flex', alignItems: 'center', marginRight: '150px', fontSize: "30px" }}>
               <Link to='/'>
                 <Button style={{ color: "white" }}>
                   <FaHome style={{ marginRight: '10px', height: '50px', width: '50px' }} />
@@ -140,7 +140,7 @@ const Navbar = () => {
                       </IconButton>
                     </InputAdornment>
                   ),
-                  style: { backgroundColor: 'white', borderRadius: '50px', width: '150px', height: '40px' },
+                  style: { backgroundColor: 'white', borderRadius: '50px', width: '250px', height: '40px' },
                 }}
               />
             </form>
@@ -244,7 +244,7 @@ const Navbar = () => {
               onClose={handleClose}
               PaperProps={{ style: { backgroundColor: "#8E7AB5", color: "white" } }}
             >
-              <MenuItem onClick={handleClose} component={Link} to="/livingroom">Living Room</MenuItem>
+              {/* <MenuItem onClick={handleClose} component={Link} to="/livingroom">Living Room</MenuItem> */}
               <MenuItem onClick={handleClose} component={Link} to="/bedroom">Bedroom</MenuItem>
               <MenuItem onClick={handleClose} component={Link} to="/kitchen">Kitchen</MenuItem>
               <MenuItem onClick={handleClose} component={Link} to="/bathroom">Bathroom</MenuItem>

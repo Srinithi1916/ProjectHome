@@ -7,7 +7,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import LivingRoom from './components/LivingRoom';
+// import LivingRoom from './components/LivingRoom';
 import Bedroom from './components/Bedroom';
 import Kitchen from './components/Kitchen';
 import Bathroom from './components/Bathroom';
@@ -58,7 +58,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/livingroom" element={<LivingRoom />} />
+        {/* <Route path="/livingroom" element={<LivingRoom />} /> */}
         <Route path="/bedroom" element={<Bedroom />} />
         <Route path="/kitchen" element={<Kitchen />} />
         <Route path="/bathroom" element={<Bathroom />} />
